@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/select_child_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grey_underline"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_payment" />
+
+        <TextView
+            android:id="@+id/fees_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/imageView"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/date"
+            android:textColor="@color/GreyTextColor"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/fees_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fees_date"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/imageView"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/ksh"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/fees_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fees_amount"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/imageView"
+            android:fontFamily="@font/avenirltstd_light"
+            android:text="@string/description"
+            android:textColor="@color/GreyTextColor"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="false"
+            />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

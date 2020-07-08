@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">FIS Remote Learning</string>
+    <string name="powered_by_fis">Powered by FIS</string>
+    <string name="copyright">©</string>
+    <string name="sign_in">Sign In</string>
+    <string name="empty" />
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="_0712345678">hint: 0712345678</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="next_page">Next page</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="this_section_is_optional_if_you_don_t_have_spouse_details_proceed_to_by_clicking_register_button">This section is optional, if you don\'t have spouse details, proceed to by clicking \'register\' button.</string>
+    <string name="spouse_s_first_name">Spouse\'s first name</string>
+    <string name="spouse_s_last_name">Spouse\'s last name</string>
+    <string name="spouse_s_email_address">Spouse\'s email address</string>
+    <string name="spouse_s_phone_number">Spouse\'s phone number</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="fis">FIS</string>
+    <string name="remote_learning">Remote Learning</string>
+    <string name="keep_track_of">Keep track of your child\'s progress with our remote learning classes for all our school sections.</string>
+    <string name="i_m_a_new_parent">I\'m a new Parent</string>
+    <string name="already_an_fis_parent">Already an FIS parent?</string>
+    <string name="register">Register</string>
+    <string name="back">Back</string>
+    <string name="charles_wafula">Charles Wafula</string>
+    <string name="active_student_profiles">Active student profiles</string>
+    <string name="student_name">Student name</string>
+    <string name="fname">Fname</string>
+    <string name="add_profile">Add profile</string>
+    <string name="in_active_student_profiles">In-active student profiles</string>
+    <string name="verified">Verified</string>
+    <string name="account_status">Account status</string>
+    <string name="student_profile">Student profile</string>
+    <string name="fees">Fees</string>
+    <string name="payment_details">Payment details</string>
+    <string name="student_diary">Student diary</string>
+    <string name="click_back_again">click back again to exit</string>
+    <string-array name="section_entries">
+        <item>Self</item>
+        <item>Spouse</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="status">status</string>
+    <string name="school_details">School details</string>
+    <string name="cancel_payment_plan">Cancel student payment plan</string>
+    <string name="balance">Balance</string>
+    <string name="ksh">KSH</string>
+    <string name="total_invoiced">Total invoiced</string>
+    <string name="total_paid">Total paid</string>
+    <string name="fees_statement">fees statement</string>
+    <string name="lipa_na_mpesa">Lipa na mpesa</string>
+    <string name="transactions_log">Transactions log</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="previous_reports">Previous reports</string>
+    <string name="no_reports_found">No reports found</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/StudentImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:elevation="2dp"
+        android:src="@drawable/fis_user"
+        app:civ_border_color="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/StudentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/avenirltstd_light"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/fname"
+        android:textColor="@color/GreyTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/StudentImage"
+        app:layout_constraintStart_toStartOf="@+id/StudentImage"
+        app:layout_constraintTop_toBottomOf="@+id/StudentImage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,2 @@
+rootProject.name='FIS_REMOTE_LEARNING'
+include ':app'

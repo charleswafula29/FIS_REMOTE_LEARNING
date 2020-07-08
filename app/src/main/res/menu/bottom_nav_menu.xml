@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_user_icon"
+        android:title="@string/student_profile"
+        />
+
+    <item
+        android:id="@+id/navigation_fees"
+        android:icon="@drawable/ic_wallet"
+        android:title="@string/fees"
+        />
+
+    <item
+        android:id="@+id/navigation_diary"
+        android:icon="@drawable/ic_diary"
+        android:title="@string/student_diary"
+        />
+
+</menu>
