@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/image_back"
+        android:background="@drawable/bachground_gradient"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal" />
 
@@ -86,8 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:elevation="5dp"
             tools:targetApi="lollipop"
             android:paddingBottom="8dp">

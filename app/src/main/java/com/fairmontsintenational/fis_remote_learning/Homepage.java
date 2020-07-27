@@ -1,21 +1,33 @@
 package com.fairmontsintenational.fis_remote_learning;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fairmontsintenational.fis_remote_learning.adapters.StudentsAdapter;
 import com.fairmontsintenational.fis_remote_learning.classes.Constants;
+import com.fairmontsintenational.fis_remote_learning.classes.Sessions;
 import com.fairmontsintenational.fis_remote_learning.models.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import io.paperdb.Paper;
 
 public class Homepage extends AppCompatActivity {
 
@@ -29,6 +41,7 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        ImageView UserImage = findViewById(R.id.DefaultPagePic);
         ActiveRecycler = findViewById(R.id.ActiveRecycler);
         InactiveRecycler = findViewById(R.id.InactiveRecycler);
         ActiveRecycler.setHasFixedSize(true);
@@ -39,21 +52,76 @@ public class Homepage extends AppCompatActivity {
 
         getProfiles();
 
+        UserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Homepage.this, UserProfile.class);
+                intent.putExtra("parent_name","");
+                intent.putExtra("phoneNo", "");
+                startActivity(intent);
+            }
+        });
+
         ((TextView) findViewById(R.id.activeTitle)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Homepage.this,StudentProfiles.class);
+                intent.putExtra("Type",Constants.ACTIVE_STUDENTS.toString());
+                startActivity(intent);
             }
         });
 
         ((TextView) findViewById(R.id.InactiveTitle)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(Homepage.this,StudentProfiles.class);
+                intent.putExtra("Type",Constants.INACTIVE_STUDENTS.toString());
+                startActivity(intent);
+            }
+        });
 
+        ((ImageView) findViewById(R.id.Menu)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomPopupActivity.ParentHomeMenuBottomSheet(Homepage.this, "", "",
+                        new BottomPopupActivity.onClickOptionsListener() {
+                            @Override
+                            public void logoutClicked() {
+                                LogOut();
+                            }
+                        });
             }
         });
 
 
+    }
+
+    private void LogOut() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Homepage.this);
+        LayoutInflater inflater = LayoutInflater.from(Homepage.this);
+        View view = inflater.inflate(R.layout.confirmation_popup, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        Button proceed = view.findViewById(R.id.ConfirmationOk);
+
+        (view.findViewById(R.id.ConfirmationCancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Paper.book().write("Session", Sessions.InActive.toString());
+                startActivity(new Intent(Homepage.this,Login.class));
+                finish();
+            }
+        });
     }
 
     private void getProfiles() {
@@ -62,9 +130,9 @@ public class Homepage extends AppCompatActivity {
 
         ActiveStudents.add(new StudentModel(null,
                 "https://webneel.com/daily/sites/default/files/images/daily/08-2018/12-portrait-photography-beautiful-kid-sam.jpg",
-                "Ruth Kabura",
+                "Jane Doe",
                 "PP2",
-                "ruth@yopmail.com",
+                "rose@yopmail.com",
                 "123456",
                 "Verified",
                 Constants.NORMAL.toString()));

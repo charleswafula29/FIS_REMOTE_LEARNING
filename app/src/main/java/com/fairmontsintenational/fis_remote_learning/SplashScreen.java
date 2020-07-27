@@ -65,7 +65,6 @@ public class SplashScreen extends AppCompatActivity {
                 @Override
                 public void run() {
                     Paper.book().write("Session", Sessions.InActive.toString());
-
                     startActivity(new Intent(SplashScreen.this, Introduction.class));
                     finish();
                 }

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RegisterStudent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/register_student"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <params.com.stepview.StatusViewScroller
+        android:id="@+id/StepView"
+        style="@style/customfont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="10dp"
+        android:entries="@array/student_section_entries"
+        app:circleColor="@color/colorAccent"
+        app:circleColorCurrent="@color/white"
+        app:circleColorIncomplete="@android:color/transparent"
+        app:circleColorType="fillStroke"
+        app:circleRadius="15dp"
+        app:circleStrokeColor="@color/colorAccent"
+        app:circleStrokeColorCurrent="@color/colorAccent"
+        app:circleStrokeColorIncomplete="@color/GreyColor4"
+        app:circleStrokeWidth="2dp"
+        app:completeDrawable="@drawable/ic_done_black_24dp"
+        app:currentCount="1"
+        app:drawLabels="true"
+        app:labelFont="@font/avenirltstd_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ToolBar"
+        app:lineColor="@color/colorAccent"
+        app:lineColorCurrent="@color/colorAccent"
+        app:lineColorIncomplete="@color/GreyColor4"
+        app:lineGap="12dp"
+        app:lineLength="50dp"
+        app:lineWidth="3dp"
+        app:statusFont="@font/avenirltstd_light"
+        app:stepCount="2"
+        app:textColorLabels="@color/colorPrimary"
+        app:textColorLabelsCurrent="@color/colorPrimary"
+        app:textColorStatus="@color/GreyTextColor"
+        app:textSizeLabels="15sp"
+        app:textSizeStatus="13sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/PageOne"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/BottomPage"
+        app:layout_constraintTop_toBottomOf="@+id/StepView">
+
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/first_name"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintBottom_toTopOf="@+id/Register_Fname"
+            app:layout_constraintStart_toStartOf="@+id/Register_Fname"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Register_Fname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="5dp"
+            android:autofillHints="@string/first_name"
+            android:background="@drawable/rounded_blue_border"
+            android:fontFamily="@font/avenirltstd_light"
+            android:hint="@string/empty"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/Register_Lname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/avenir_regular"
+            android:paddingBottom="3dp"
+            android:text="@string/last_name"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintBottom_toTopOf="@+id/Register_Lname"
+            app:layout_constraintStart_toStartOf="@+id/Register_Lname" />
+
+        <EditText
+            android:id="@+id/Register_Lname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="@string/last_name"
+            android:background="@drawable/rounded_blue_border"
+            android:fontFamily="@font/avenirltstd_light"
+            android:hint="@string/empty"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/Register_Fname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Register_Fname"
+            app:layout_constraintTop_toTopOf="@+id/Register_Fname" />
+
+        <TextView
+            android:id="@+id/AgeHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/age"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintBottom_toTopOf="@+id/Register_Age"
+            app:layout_constraintStart_toStartOf="@+id/Register_Fname"
+            app:layout_constraintTop_toBottomOf="@+id/Register_Lname" />
+
+        <EditText
+            android:id="@+id/Register_Age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:autofillHints="@string/empty"
+            android:background="@drawable/rounded_blue_border"
+            android:fontFamily="@font/avenirltstd_light"
+            android:hint="@string/empty"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/AgeHint" />
+
+        <TextView
+            android:id="@+id/LevelHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/student_level"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintStart_toStartOf="@+id/AgeHint"
+            app:layout_constraintTop_toBottomOf="@+id/Register_Age" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_blue_border"
+            app:layout_constraintBottom_toBottomOf="@+id/StudentLevel_Spinner"
+            app:layout_constraintEnd_toEndOf="@+id/StudentLevel_Spinner"
+            app:layout_constraintStart_toStartOf="@+id/StudentLevel_Spinner"
+            app:layout_constraintTop_toTopOf="@+id/StudentLevel_Spinner" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/StudentLevel_Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/avenirltstd_light"
+            android:gravity="start"
+            android:padding="18dp"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LevelHint"
+            app:ms_background_color="@android:color/transparent"
+            app:ms_background_selector="@drawable/spinner_underline" />
+
+        <RadioGroup
+            android:id="@+id/Register_Gender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/StudentLevel_Spinner"
+            app:layout_constraintStart_toStartOf="@+id/StudentLevel_Spinner"
+            app:layout_constraintTop_toBottomOf="@+id/StudentLevel_Spinner">
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorAccent"
+                android:fontFamily="@font/avenirltstd_light"
+                android:text="@string/male"
+                android:textColor="@color/GreyTextColor"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:buttonTint="@color/colorAccent"
+                android:fontFamily="@font/avenirltstd_light"
+                android:text="@string/female"
+                android:textColor="@color/GreyTextColor"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/PageTwo"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/BottomPage"
+        app:layout_constraintTop_toBottomOf="@+id/StepView">
+
+        <TextView
+            android:id="@+id/Note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_light"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:lineSpacingMultiplier="1.4"
+            android:background="@color/GreyColor3"
+            android:text="@string/payment_note"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Phonehint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/phone_number"
+            android:textColor="@color/GreyTextColor"
+            app:layout_constraintStart_toStartOf="@+id/Register_PhoneNo"
+            app:layout_constraintTop_toBottomOf="@+id/Note" />
+
+        <EditText
+            android:id="@+id/Register_PhoneNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:autofillHints="@string/phone_number"
+            android:background="@drawable/rounded_blue_border"
+            android:fontFamily="@font/avenirltstd_light"
+            android:hint="@string/_0712345678"
+            android:inputType="phone"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/GreyTextColor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Phonehint" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/BottomPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:drawableEnd="@drawable/ic_next"
+            android:fontFamily="@font/avenirltstd_light"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/next_page"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="15dp"
+            android:drawableStart="@drawable/ic_back"
+            android:fontFamily="@font/avenirltstd_light"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:drawableEnd="@drawable/ic_next"
+            android:fontFamily="@font/avenirltstd_light"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

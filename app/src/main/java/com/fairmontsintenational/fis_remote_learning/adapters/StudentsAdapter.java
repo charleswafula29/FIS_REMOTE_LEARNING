@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fairmontsintenational.fis_remote_learning.R;
+import com.fairmontsintenational.fis_remote_learning.RegisterStudent;
 import com.fairmontsintenational.fis_remote_learning.SingleStudentProfile;
 import com.fairmontsintenational.fis_remote_learning.classes.Constants;
 import com.fairmontsintenational.fis_remote_learning.fragments.StudentProfileFragment;
@@ -72,7 +73,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.ViewHo
 //                fragobj.setArguments(bundle);
 
                 if(model.getType().equals(Constants.ADD.toString())){
-                    Toast.makeText(context, "Add new profile", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, RegisterStudent.class));
                 }else{
                     context.startActivity(new Intent(context, SingleStudentProfile.class));
                 }

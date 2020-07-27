@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/image_back"
+        android:background="@drawable/bachground_gradient"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal" />
 
@@ -47,27 +47,26 @@
 
     <ImageView
         android:id="@+id/Menu"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         android:src="@drawable/ic_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/Notifications"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="25dp"
         android:src="@drawable/ic_notifications"
         app:layout_constraintBottom_toBottomOf="@+id/Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Menu"
-        android:layout_marginRight="25dp"
         tools:ignore="ContentDescription" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -88,8 +87,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:background="@drawable/material_login"
                 android:elevation="5dp"
                 tools:targetApi="lollipop">
@@ -136,8 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/material_login"
                 android:elevation="5dp"

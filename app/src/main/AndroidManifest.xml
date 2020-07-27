@@ -4,6 +4,9 @@
     package="com.fairmontsintenational.fis_remote_learning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,17 +17,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".SingleStudentProfile"
-            android:theme="@style/BlackStatusBar"/>
+        <activity android:name=".classes.SendMail"/>
+        <activity
+            android:name=".UserProfile"
+            android:theme="@style/LightAccentTitle"/>
+        <activity android:name=".BottomPopupActivity" />
+        <activity
+            android:name=".RegisterStudent"
+            android:theme="@style/WhiteStatusBar" />
+        <activity
+            android:name=".StudentProfiles"
+            android:theme="@style/WhiteStatusBar" />
+        <activity
+            android:name=".SingleStudentProfile"
+            android:theme="@style/LightAccentTitle" />
         <activity
             android:name=".Register"
             android:theme="@style/LightAccentTitle" />
         <activity
             android:name=".Login"
-            android:theme="@style/BlackStatusBar" />
+            android:theme="@style/LightAccentTitle" />
         <activity
             android:name=".Homepage"
-            android:theme="@style/BlackStatusBar" />
+            android:theme="@style/LightAccentTitle" />
         <activity
             android:name=".Introduction"
             android:theme="@style/WhiteStatusBar" />

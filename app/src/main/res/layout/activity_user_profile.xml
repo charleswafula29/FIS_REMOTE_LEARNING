@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfile">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/my_profile"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/ToolBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bachground_gradient"
+            android:layout_weight="3">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/AccountProfile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/fis_user"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="3dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:targetApi="lollipop" />
+
+            <ProgressBar
+                app:layout_constraintTop_toTopOf="@+id/AccountProfile_image"
+                app:layout_constraintBottom_toBottomOf="@+id/AccountProfile_image"
+                app:layout_constraintStart_toStartOf="@+id/AccountProfile_image"
+                app:layout_constraintEnd_toEndOf="@+id/AccountProfile_image"
+                android:elevation="6dp"
+                android:id="@+id/ProgressBar"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateDrawable="@color/colorAccent"
+                android:indeterminate="true"
+                tools:targetApi="lollipop" />
+
+            <ImageView
+                android:id="@+id/ChoosePhoto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:elevation="5dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_camera"
+                android:background="@drawable/white_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/AccountProfile_image"
+                app:layout_constraintEnd_toEndOf="@+id/AccountProfile_image"
+                app:layout_constraintStart_toEndOf="@+id/AccountProfile_image"
+                tools:targetApi="lollipop"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/AccountProfile_names"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_regular"
+                android:gravity="center"
+                android:text="@string/charles_wafula"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/AccountProfile_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/FnameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@string/full_names"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Fname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/charles_wafula"
+                    android:textColor="@color/GreyTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/FnameTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/FnameTitle" />
+
+                <TextView
+                    android:id="@+id/PhoneNoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@string/parent_s_phone_number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Fname" />
+
+                <TextView
+                    android:id="@+id/PhoneNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/GreyTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/PhoneNoTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/PhoneNoTitle" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/Preferences"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_regular"
+                    android:gravity="start"
+                    android:paddingBottom="10dp"
+                    android:background="@drawable/grey_underline"
+                    android:text="@string/preferences"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/PhoneNo"
+                    app:layout_constraintTop_toBottomOf="@id/PhoneNo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp"/>
+
+                <TextView
+                    android:id="@+id/ResetPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:padding="20dp"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:text="@string/reset_my_password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Preferences" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,9 +47,10 @@
         <item>Self</item>
         <item>Spouse</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="student_section_entries">
+        <item>Details</item>
+        <item>Payment</item>
+    </string-array>
     <string name="status">status</string>
     <string name="school_details">School details</string>
     <string name="cancel_payment_plan">Cancel student payment plan</string>
@@ -64,4 +65,38 @@
     <string name="description">Description</string>
     <string name="previous_reports">Previous reports</string>
     <string name="no_reports_found">No reports found</string>
+    <string name="student_level">Student level</string>
+    <string name="register_student">Register student</string>
+    <string name="age">Student\'s age</string>
+    <string name="payment_note">A payment of KES. 7000/= per student per month was agreed upon to facilitate internet access and paying the teachers involved. \nAfter payment you will receive an email address and a password to sign-in the platform and access content together with the class sessions.
+        \n\nAn M-pesa STK push will be sent to the number you enter below.</string>
+    <string name="menu">Menu</string>
+    <string name="my_profile">My Profile</string>
+    <string name="report_issue">Report issue</string>
+    <string name="logout">Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="proceed">Proceed</string>
+    <string name="full_names">Full names</string>
+    <string name="parent_s_phone_number">Parent\'s phone number</string>
+    <string name="preferences">Preferences</string>
+    <string name="reset_my_password">Reset my password</string>
+    <string name="you_password_has_been_changed_successfully">Your password has been changed successfully.</string>
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
+    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
+    <string name="lbl_set_profile_photo">Set profile image</string>
+    <string name="lbl_take_camera_picture">Take a picture</string>
+    <string name="lbl_choose_from_gallery">Choose from gallery</string>
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="upload_successful">Profile picture uploaded successfully</string>
+    <string name="upload_failed">Profile picture upload failed. Try again.</string>
+    <string name="failed_picture">Picture upload failed</string>
+    <string name="profile_photo">Profile photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
 </resources>
