@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,6 @@ import io.paperdb.Paper;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 2000;
     SharedPreferences prefs = null;
 
     @SuppressLint("SetTextI18n")
@@ -46,20 +46,15 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
 
-        prefs = getSharedPreferences("com.maputo.app", MODE_PRIVATE);
+        prefs = getSharedPreferences("com.fairmontsintenational.fis_remote_learning", MODE_PRIVATE);
         Paper.init(this);
-        fetchurl();
+        //fetchurl();
 
         TextView poweredBy = findViewById(R.id.ProweredBy);
         int year = Calendar.getInstance().get(Calendar.YEAR);
         poweredBy.setText(getString(R.string.copyright)+year+". "+getString(R.string.powered_by_fis));
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        int SPLASH_TIME_OUT = 3000;
+        int SPLASH_TIME_OUT = 2000;
         if (prefs.getBoolean("firstrun", true)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -78,6 +73,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }, SPLASH_TIME_OUT);
         }
+
     }
 
     private void checkSession() {
@@ -91,43 +87,43 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
-    private void fetchurl() {
-        final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, BaseUrl.GET_MAIN_URL, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray=response.getJSONArray("User");
-                            Paper.book().write("Main_url",jsonArray.get(0).toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Invalid Credentials! Please try again!!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }else{
-                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                }
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-            }
-        });
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                6000,
-                -1,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(jsonObjectRequest);
-    }
+//    private void fetchurl() {
+//        final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, BaseUrl.GET_MAIN_URL, null,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            JSONArray jsonArray=response.getJSONArray("User");
+//                            Paper.book().write("Main_url",jsonArray.get(0).toString());
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                String message = null;
+//                if (error instanceof NetworkError) {
+//                    message = "Cannot connect to Internet...Please check your connection!";
+//                } else if (error instanceof ServerError) {
+//                    message = "The server could not be found. Please try again after some time!!";
+//                } else if (error instanceof AuthFailureError) {
+//                    message = "Cannot connect to Internet...Please check your connection!";
+//                } else if (error instanceof ParseError) {
+//                    message = "Invalid Credentials! Please try again!!";
+//                } else if (error instanceof TimeoutError) {
+//                    message = "Connection TimeOut! Please check your internet connection.";
+//                }else{
+//                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+//                }
+//                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+//                6000,
+//                -1,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+//        requestQueue.add(jsonObjectRequest);
+//    }
 }

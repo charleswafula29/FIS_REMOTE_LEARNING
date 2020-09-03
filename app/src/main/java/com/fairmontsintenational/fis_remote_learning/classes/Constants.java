@@ -4,5 +4,7 @@ public enum Constants {
     ADD,
     NORMAL,
     ACTIVE_STUDENTS,
-    INACTIVE_STUDENTS
+    INACTIVE_STUDENTS,
+    Male,
+    Female
 }

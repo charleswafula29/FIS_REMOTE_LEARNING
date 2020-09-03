@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="8dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -19,6 +21,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute" />
 
+    <ProgressBar
+        android:id="@+id/Loader"
+        android:visibility="gone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/StudentImage"
+        app:layout_constraintEnd_toEndOf="@+id/StudentImage"
+        app:layout_constraintStart_toStartOf="@+id/StudentImage"
+        app:layout_constraintTop_toTopOf="@+id/StudentImage" />
+
     <TextView
         android:id="@+id/StudentName"
         android:layout_width="wrap_content"
@@ -28,8 +40,9 @@
         android:gravity="center"
         android:padding="4dp"
         android:text="@string/fname"
-        android:textColor="@color/GreyTextColor"
+        android:textColor="@color/black"
         android:textSize="14sp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/StudentImage"
         app:layout_constraintStart_toStartOf="@+id/StudentImage"
         app:layout_constraintTop_toBottomOf="@+id/StudentImage" />

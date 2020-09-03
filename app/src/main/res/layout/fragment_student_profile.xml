@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/GreyColor3"
+    android:id="@+id/AccountLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.StudentProfileFragment">
 
@@ -16,11 +18,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/AccountProfile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:elevation="4dp"
         android:layout_marginBottom="25dp"
-        android:src="@drawable/charlie"
+        android:src="@drawable/boy_icon"
         app:civ_border_color="@color/white"
         app:civ_border_width="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
@@ -48,8 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="6dp"
-        android:indeterminate="true"
-        android:indeterminateDrawable="@color/colorPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/AccountProfile_image"
         app:layout_constraintEnd_toEndOf="@+id/AccountProfile_image"
@@ -100,38 +100,67 @@
                 android:paddingEnd="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Credentials"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="15dp"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/grey_underline">
 
                     <TextView
                         android:id="@+id/NamesTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:drawableEnd="@drawable/ic_next"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirltstd_light"
-                        android:textColor="@color/GreyTextColor"
-                        android:text="@string/email_address"
-                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/online_credentials"
+                        android:gravity="start"
                         android:drawablePadding="10dp"
                         android:textSize="15sp"
-                        android:drawableStart="@drawable/ic_student"
+                        android:drawableStart="@drawable/ic_book"
+                        android:drawableTint="@color/colorPrimaryDark"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="UnusedAttribute" />
 
                     <TextView
-                        android:id="@+id/StudentEmail"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirltstd_light"
-                        android:text="@string/email_address"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:text="@string/click_icon_to_view"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="italic"
+                        android:textSize="14sp"
+                        android:layout_marginStart="5dp"
                         app:layout_constraintBottom_toBottomOf="@+id/NamesTitle"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/NamesTitle"
                         app:layout_constraintTop_toTopOf="@+id/NamesTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/grey_underline">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/Recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/creds_list" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -143,31 +172,121 @@
                     android:background="@drawable/grey_underline">
 
                     <TextView
-                        android:id="@+id/admissionTitle"
+                        android:id="@+id/AdmissionNoTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirltstd_light"
-                        android:textColor="@color/GreyTextColor"
-                        android:text="@string/password"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/admission_no"
                         android:gravity="center"
                         android:drawablePadding="10dp"
+                        android:textStyle="bold"
                         android:textSize="15sp"
                         android:drawableStart="@drawable/ic_student"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="UnusedAttribute" />
 
                     <TextView
-                        android:id="@+id/StudentPassword"
+                        android:id="@+id/AdmissionNo"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_regular"
+                        android:text="@string/status"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/AdmissionNoTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/AdmissionNoTitle"
+                        app:layout_constraintTop_toTopOf="@+id/AdmissionNoTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="@drawable/grey_underline">
+
+                    <TextView
+                        android:id="@+id/SUIDTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirltstd_light"
-                        android:text="@string/password"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/student_suid"
+                        android:gravity="center"
+                        android:drawablePadding="10dp"
+                        android:textStyle="bold"
                         android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/admissionTitle"
+                        android:drawableStart="@drawable/ic_student"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/SUID"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_regular"
+                        android:text="@string/status"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/SUIDTitle"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/admissionTitle" />
+                        app:layout_constraintStart_toEndOf="@+id/SUIDTitle"
+                        app:layout_constraintTop_toTopOf="@+id/SUIDTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="@drawable/grey_underline">
+
+                    <TextView
+                        android:id="@+id/ClassNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenirltstd_light"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/class_name"
+                        android:gravity="center"
+                        android:drawablePadding="10dp"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:drawableStart="@drawable/ic_class"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/ClassName"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_regular"
+                        android:text="@string/status"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/ClassNameTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ClassNameTitle"
+                        app:layout_constraintTop_toTopOf="@+id/ClassNameTitle" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -183,11 +302,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenirltstd_light"
-                        android:textColor="@color/GreyTextColor"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/account_status"
                         android:gravity="center"
                         android:drawablePadding="10dp"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         android:drawableStart="@drawable/ic_wallet"
                         android:drawableTint="@color/colorPrimary"
                         app:layout_constraintTop_toTopOf="parent"
@@ -197,47 +317,19 @@
 
                     <TextView
                         android:id="@+id/AccountStatus"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:lineSpacingMultiplier="1.2"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenirltstd_light"
+                        android:fontFamily="@font/avenir_regular"
                         android:text="@string/status"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/AccountStatusTitle"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/AccountStatusTitle"
                         app:layout_constraintTop_toTopOf="@+id/AccountStatusTitle" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/SchoolDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/grey_underline"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_school_details"
-                        android:drawablePadding="10dp"
-                        android:fontFamily="@font/avenir_regular"
-                        android:gravity="center"
-                        android:text="@string/school_details"
-                        android:textColor="@color/GreyTextColor"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_next"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -258,6 +350,7 @@
                         android:text="@string/cancel_payment_plan"
                         android:textColor="@color/Red"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -2,6 +2,10 @@ package com.fairmontsintenational.fis_remote_learning;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +25,10 @@ import android.widget.Toast;
 import com.fairmontsintenational.fis_remote_learning.adapters.StudentsAdapter;
 import com.fairmontsintenational.fis_remote_learning.classes.Constants;
 import com.fairmontsintenational.fis_remote_learning.classes.Sessions;
+import com.fairmontsintenational.fis_remote_learning.models.LoginDataModel;
 import com.fairmontsintenational.fis_remote_learning.models.StudentModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +38,6 @@ import io.paperdb.Paper;
 
 public class Homepage extends AppCompatActivity {
 
-    RecyclerView ActiveRecycler,InactiveRecycler;
-    List<StudentModel> ActiveStudents,InactiveStudents;
-    StudentsAdapter ActiveAdapter,InactiveAdapter;
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -41,145 +45,15 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        ImageView UserImage = findViewById(R.id.DefaultPagePic);
-        ActiveRecycler = findViewById(R.id.ActiveRecycler);
-        InactiveRecycler = findViewById(R.id.InactiveRecycler);
-        ActiveRecycler.setHasFixedSize(true);
-        ActiveRecycler.setLayoutManager(new LinearLayoutManager(Homepage.this,RecyclerView.HORIZONTAL,false));
+        BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        InactiveRecycler.setHasFixedSize(true);
-        InactiveRecycler.setLayoutManager(new LinearLayoutManager(Homepage.this,RecyclerView.HORIZONTAL,false));
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_my_account)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
 
-        getProfiles();
-
-        UserImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Homepage.this, UserProfile.class);
-                intent.putExtra("parent_name","");
-                intent.putExtra("phoneNo", "");
-                startActivity(intent);
-            }
-        });
-
-        ((TextView) findViewById(R.id.activeTitle)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homepage.this,StudentProfiles.class);
-                intent.putExtra("Type",Constants.ACTIVE_STUDENTS.toString());
-                startActivity(intent);
-            }
-        });
-
-        ((TextView) findViewById(R.id.InactiveTitle)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homepage.this,StudentProfiles.class);
-                intent.putExtra("Type",Constants.INACTIVE_STUDENTS.toString());
-                startActivity(intent);
-            }
-        });
-
-        ((ImageView) findViewById(R.id.Menu)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomPopupActivity.ParentHomeMenuBottomSheet(Homepage.this, "", "",
-                        new BottomPopupActivity.onClickOptionsListener() {
-                            @Override
-                            public void logoutClicked() {
-                                LogOut();
-                            }
-                        });
-            }
-        });
-
-
-    }
-
-    private void LogOut() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Homepage.this);
-        LayoutInflater inflater = LayoutInflater.from(Homepage.this);
-        View view = inflater.inflate(R.layout.confirmation_popup, null);
-        builder.setView(view);
-        final AlertDialog dialog = builder.create();
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-        Button proceed = view.findViewById(R.id.ConfirmationOk);
-
-        (view.findViewById(R.id.ConfirmationCancel)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        proceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Paper.book().write("Session", Sessions.InActive.toString());
-                startActivity(new Intent(Homepage.this,Login.class));
-                finish();
-            }
-        });
-    }
-
-    private void getProfiles() {
-        ActiveStudents = new ArrayList<>();
-        InactiveStudents = new ArrayList<>();
-
-        ActiveStudents.add(new StudentModel(null,
-                "https://webneel.com/daily/sites/default/files/images/daily/08-2018/12-portrait-photography-beautiful-kid-sam.jpg",
-                "Jane Doe",
-                "PP2",
-                "rose@yopmail.com",
-                "123456",
-                "Verified",
-                Constants.NORMAL.toString()));
-
-        ActiveStudents.add(new StudentModel(null,
-                "https://scontent.fnbo5-1.fna.fbcdn.net/v/t31.0-8/15025432_10208035684758749_3724918611520034123_o.jpg?_nc_cat=102&_nc_sid=09cbfe&_nc_eui2=AeEhWL0z9e-afmnQa-hR_IreTJNu8mChjIxMk27yYKGMjIrEDRL-KR-tbjOYm4_dokw2J6OmQtGNUDlTWYYhZM7a&_nc_ohc=jcqnLqob-jkAX-8-sxj&_nc_pt=5&_nc_ht=scontent.fnbo5-1.fna&oh=e4799b304647806498c1614dc745f5e3&oe=5F23DAAB",
-                "Kaylor Moraa",
-                "PP2",
-                "Kaylor@yopmail.com",
-                "123456",
-                "Verified",
-                Constants.NORMAL.toString()));
-
-        //ADD button
-        ActiveStudents.add(new StudentModel(null,"","","","","","",Constants.ADD.toString()));
-
-        //Inactive ones
-
-        InactiveStudents.add(new StudentModel(null,"https://images.theconversation.com/files/138670/original/image-20160921-21723-zvi9hu.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip",
-                "Miles Matoke",
-                "PP2",
-                "miles@yopmail.com",
-                "123456",
-                "Under Review",
-                Constants.NORMAL.toString()));
-
-        InactiveStudents.add(new StudentModel(null,"https://scontent.fnbo5-1.fna.fbcdn.net/v/t1.0-9/105997343_4686941331331940_6178530885906463367_n.jpg?_nc_cat=103&_nc_sid=730e14&_nc_eui2=AeEQivP5Rb5U_7YrlSiPxtpN78mLnRIbm7bvyYudEhubtpm1OD7krSPsMGKcIrB-SbU2GK0FEDPF0ozeIQY2p9wN&_nc_ohc=HwEPRpC803IAX9jCtL5&_nc_pt=5&_nc_ht=scontent.fnbo5-1.fna&oh=dc9abc3b4554f43d1f1235de2ff7d4b5&oe=5F256F76",
-                "Zuberi Jaylani",
-                "PP2",
-                "zubby@yopmail.com",
-                "123456",
-                "Under Review",
-                Constants.NORMAL.toString()));
-
-        ActiveAdapter = new StudentsAdapter(ActiveStudents,Homepage.this);
-        ActiveRecycler.setAdapter(ActiveAdapter);
-
-        InactiveAdapter = new StudentsAdapter(InactiveStudents,Homepage.this);
-        InactiveRecycler.setAdapter(InactiveAdapter);
-
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getProfiles();
     }
 
     @Override

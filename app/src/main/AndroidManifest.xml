@@ -17,14 +17,40 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".classes.SendMail"/>
+        <activity
+            android:screenOrientation="landscape"
+            android:theme="@style/BlackStatusBar"
+            android:name=".FeeStatement"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".StudentRegistrationComplete"
+            android:theme="@style/WhiteStatusBar" />
+        <activity android:name=".utils.MpesaActivity" />
+        <activity
+            android:name=".SelectPackage"
+            android:theme="@style/BlackStatusBar" />
+        <activity android:name=".classes.SendMail" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/WhiteStatusBar" /> <!-- cache directory file provider paths -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".UserProfile"
-            android:theme="@style/LightAccentTitle"/>
+            android:theme="@style/LightAccentTitle" />
         <activity android:name=".BottomPopupActivity" />
         <activity
             android:name=".RegisterStudent"
-            android:theme="@style/WhiteStatusBar" />
+            android:theme="@style/BlackStatusBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".StudentProfiles"
             android:theme="@style/WhiteStatusBar" />
@@ -33,13 +59,15 @@
             android:theme="@style/LightAccentTitle" />
         <activity
             android:name=".Register"
-            android:theme="@style/LightAccentTitle" />
+            android:theme="@style/LightAccentTitle"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Login"
-            android:theme="@style/LightAccentTitle" />
+            android:theme="@style/LightAccentTitle"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Homepage"
-            android:theme="@style/LightAccentTitle" />
+            android:theme="@style/BlackStatusBar" />
         <activity
             android:name=".Introduction"
             android:theme="@style/WhiteStatusBar" />

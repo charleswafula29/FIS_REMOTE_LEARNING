@@ -3,8 +3,10 @@
     <color name="colorPrimary">#57BAB7</color>
     <color name="colorIcons">#57BAB7</color>
     <color name="colorPrimaryDark">#57BAB7</color>
+    <color name="backgroundcolor">#57BAB7</color>
     <color name="colorAccent">#8FE2DC</color>
     <color name="white">#FFFFFF</color>
+    <color name="White">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="lightestBlue">#A3EFEA</color>
     <color name="GreyTextColor">#707070</color>

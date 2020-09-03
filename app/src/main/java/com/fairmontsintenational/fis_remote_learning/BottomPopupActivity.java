@@ -1,11 +1,15 @@
 package com.fairmontsintenational.fis_remote_learning;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -19,6 +23,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +43,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fairmontsintenational.fis_remote_learning.classes.SendMail;
+import com.fairmontsintenational.fis_remote_learning.models.CredentialsModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -276,6 +282,31 @@ public class BottomPopupActivity extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
+    public static void StudentCredentialsBottomSheet(final Context context, final List<CredentialsModel> list){
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                context, R.style.BottomSheetDialogTheme);
+        final View Bottomview = LayoutInflater
+                .from(context).inflate(R.layout.bottom_student_credentials, null);
+        bottomSheetDialog.setContentView(Bottomview);
+
+        RecyclerView recyclerView = Bottomview.findViewById(R.id.Recycler);
+        TextView notFound = Bottomview.findViewById(R.id.NotFound);
+
+        if(list.size() == 0){
+            notFound.setVisibility(View.VISIBLE);
+        }else{
+            notFound.setVisibility(View.GONE);
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setHasFixedSize(true);
+
+        InnerCredsAdapter adapter = new InnerCredsAdapter(list,context);
+        recyclerView.setAdapter(adapter);
+
+        bottomSheetDialog.show();
+    }
+
     public static void showImagePickerOptions(Context context, final PickerOptionListener listener) {
         // setup the alert builder
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -459,4 +490,50 @@ public class BottomPopupActivity extends AppCompatActivity {
             }
         }
     }
+
+    private static class InnerCredsAdapter extends RecyclerView.Adapter<InnerCredsAdapter.viewHolder>{
+        private List<CredentialsModel> list;
+        private Context context;
+
+        public InnerCredsAdapter(List<CredentialsModel> list, Context context) {
+            this.list = list;
+            this.context = context;
+        }
+
+        @NonNull
+        @Override
+        public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.creds_list,parent,false);
+            return new viewHolder(view);
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+            CredentialsModel model = list.get(position);
+            holder.platform.setText(context.getString(R.string.platform)+" "+model.getPlatForm());
+            holder.username.setText(context.getString(R.string.username)+" "+model.getUserName());
+            holder.password.setText(context.getString(R.string.pass)+" "+model.getPassword());
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        private class viewHolder extends RecyclerView.ViewHolder{
+
+            TextView platform,username,password;
+
+            public viewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                platform = itemView.findViewById(R.id.Platform);
+                username = itemView.findViewById(R.id.Username);
+                password = itemView.findViewById(R.id.Password);
+            }
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/GreyColor3"
@@ -58,6 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/avenir_regular"
                 android:text="@string/ksh"
+                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,10 +96,11 @@
                 android:id="@+id/Fees_total_invoiced"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenirltstd_light"
+                android:fontFamily="@font/avenir_regular"
+                android:textStyle="bold"
                 android:text="@string/total_invoiced"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/Fees_total_invoiced_label"
                 app:layout_constraintStart_toStartOf="@+id/Fees_total_invoiced_label"
@@ -108,10 +111,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenirltstd_light"
+                android:fontFamily="@font/avenir_regular"
+                android:textStyle="bold"
                 android:text="@string/total_paid"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@+id/Fees_total_paid_label"
                 app:layout_constraintStart_toStartOf="@+id/Fees_total_paid_label"
                 app:layout_constraintTop_toBottomOf="@+id/Fees_total_paid_label" />
@@ -122,7 +126,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="2"
@@ -175,8 +179,25 @@
             android:background="@drawable/blue_underline"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fees_logs_recycler"
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/NoRecordsFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_light"
+            android:text="@string/no_transactions_found"
+            android:textColor="@color/GreyTextColor"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/blue_underline"
+            />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/Refresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/CurrentActiveTerm"
@@ -186,8 +207,15 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            tools:listitem="@layout/fee_invoice_list" />
+            android:layout_marginTop="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fees_logs_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/fee_invoice_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,62 +1,71 @@
 package com.fairmontsintenational.fis_remote_learning.models;
 
 public class StudentModel {
-    private Integer id;
-    private String ImageUri, StudentNames, level, email, Emailpassword,status,Type;
+    private Integer Sid;
+    private String StudentNames,Gender,className,AdmNo,Status,Type;
+    private Integer Balances;
+    private String SUID;
 
-    public StudentModel(Integer id,String imageUri, String studentNames, String level, String email, String emailpassword, String status,String Type) {
-        this.id = id;
-        ImageUri = imageUri;
+    public StudentModel(Integer sid, String studentNames, String gender, String className, String admNo, String status, String type, Integer balances, String SUID) {
+        Sid = sid;
         StudentNames = studentNames;
-        this.level = level;
-        this.email = email;
-        Emailpassword = emailpassword;
-        this.status = status;
-        this.Type = Type;
+        Gender = gender;
+        this.className = className;
+        AdmNo = admNo;
+        Status = status;
+        Type = type;
+        Balances = balances;
+        this.SUID = SUID;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public String getImageUri() {
-        return ImageUri;
+    public Integer getSid() {
+        return Sid;
     }
 
     public String getStudentNames() {
         return StudentNames;
     }
 
-    public String getLevel() {
-        return level;
+    public String getGender() {
+        return Gender;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClassName() {
+        return className;
     }
 
-    public String getEmailpassword() {
-        return Emailpassword;
+    public String getAdmNo() {
+        return AdmNo;
     }
 
     public String getStatus() {
-        return status;
+        return Status;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public Integer getBalances() {
+        return Balances;
+    }
+
+    public String getSUID() {
+        return SUID;
     }
 
     @Override
     public String toString() {
         return "StudentModel{" +
-                "ImageUri='" + ImageUri + '\'' +
+                "Sid=" + Sid +
                 ", StudentNames='" + StudentNames + '\'' +
-                ", level='" + level + '\'' +
-                ", email='" + email + '\'' +
-                ", Emailpassword='" + Emailpassword + '\'' +
-                ", status='" + status + '\'' +
+                ", Gender='" + Gender + '\'' +
+                ", className='" + className + '\'' +
+                ", AdmNo='" + AdmNo + '\'' +
+                ", Status='" + Status + '\'' +
                 ", Type='" + Type + '\'' +
+                ", Balances=" + Balances +
+                ", SUID='" + SUID + '\'' +
                 '}';
     }
 }

@@ -2,29 +2,60 @@ package com.fairmontsintenational.fis_remote_learning.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fairmontsintenational.fis_remote_learning.R;
 import com.fairmontsintenational.fis_remote_learning.RegisterStudent;
+import com.fairmontsintenational.fis_remote_learning.SelectPackage;
 import com.fairmontsintenational.fis_remote_learning.SingleStudentProfile;
 import com.fairmontsintenational.fis_remote_learning.classes.Constants;
 import com.fairmontsintenational.fis_remote_learning.fragments.StudentProfileFragment;
 import com.fairmontsintenational.fis_remote_learning.models.StudentModel;
+import com.fairmontsintenational.fis_remote_learning.utils.BaseUrl;
 import com.fairmontsintenational.fis_remote_learning.utils.Utils;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.List;
+
+import io.paperdb.Paper;
+
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.Active;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.DEAC;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.HNS;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.IAAP;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.PSA;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.SAP;
+import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.SCBP;
+import static com.fairmontsintenational.fis_remote_learning.utils.Utils.DEAC_Popup;
+import static com.fairmontsintenational.fis_remote_learning.utils.Utils.PSA_Popup;
+import static com.fairmontsintenational.fis_remote_learning.utils.Utils.SAP_Popup;
 
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.ViewHolder>{
     private List<StudentModel> list;
@@ -44,7 +75,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final StudentModel model = list.get(position);
 
         if(model.getType().equals(Constants.ADD.toString())){
@@ -52,33 +83,104 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.ViewHo
             holder.StudentImage.setBackground(context.getDrawable(R.drawable.yellow_circle));
             holder.StudentName.setText(context.getString(R.string.add_profile));
         }else{
-            Glide.with(context)
-                    .load(model.getImageUri())
-                    .apply(new RequestOptions().placeholder(R.drawable.fis_user).error(R.drawable.fis_user))
-                    .into(holder.StudentImage);
 
-            holder.StudentName.setText(Utils.pickFirstName(model.getStudentNames()));
+            try{
+
+                holder.progressBar.setVisibility(View.VISIBLE);
+
+                String Url = BaseUrl.getFetchStudentPic(model.getSid());
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Url, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    Bitmap bitmap = ConvertBase64(response.getString("ByteArray"));
+                                    holder.StudentImage.setImageBitmap(bitmap);
+                                    holder.progressBar.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    holder.progressBar.setVisibility(View.GONE);
+                                    if(model.getGender().equals("Male")){
+                                        holder.StudentImage.setImageResource(R.drawable.boy_icon);
+                                    }else{
+                                        holder.StudentImage.setImageResource(R.drawable.girl_icon);
+                                    }
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        holder.progressBar.setVisibility(View.GONE);
+                        if(model.getGender().equals("Male")){
+                            holder.StudentImage.setImageResource(R.drawable.boy_icon);
+                        }else{
+                            holder.StudentImage.setImageResource(R.drawable.girl_icon);
+                        }
+                        Log.e("Error", error.toString());
+                    }
+                });
+                RequestQueue queue = Volley.newRequestQueue(context);
+                jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        0,
+                        -1,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                queue.add(jsonObjectRequest);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                if(model.getGender().equals("Male")){
+                    holder.StudentImage.setImageResource(R.drawable.boy_icon);
+                }else{
+                    holder.StudentImage.setImageResource(R.drawable.girl_icon);
+                }
+            }
+
+            holder.StudentName.setText(Utils.pickFirstName(Utils.convertCapitalText(model.getStudentNames())));
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("StdNames", model.getStudentNames());
-//                bundle.putString("StdEmail", model.getEmail());
-//                bundle.putString("StdEmailPass", model.getEmailpassword());
-//                bundle.putString("StdStatus", model.getStatus());
-//
-//                StudentProfileFragment fragobj = new StudentProfileFragment();
-//                fragobj.setArguments(bundle);
+                Gson gson = new Gson();
+                String stdModel = gson.toJson(model);
+                Paper.book().write("stdModel",stdModel);
 
                 if(model.getType().equals(Constants.ADD.toString())){
                     context.startActivity(new Intent(context, RegisterStudent.class));
                 }else{
-                    context.startActivity(new Intent(context, SingleStudentProfile.class));
+                    if(model.getStatus().equals(PSA)){
+                        AlertDialog dialog = PSA_Popup(context,model.getStudentNames());
+                        dialog.show();
+                    }
+                    else if(model.getStatus().equals(HNS)){
+                        Intent intent = new Intent(context, SelectPackage.class);
+                        intent.putExtra("SUID",String.valueOf(model.getSid()));
+                        intent.putExtra("SNames",model.getStudentNames());
+                        context.startActivity(intent);
+                    }
+                    else if(model.getStatus().equals(IAAP)){
+                        context.startActivity(new Intent(context, SingleStudentProfile.class));
+                    }
+                    else if(model.getStatus().equals(SAP)){
+                        AlertDialog dialog = SAP_Popup(context,model.getStudentNames(),model.getBalances(),model.getSid());
+                        dialog.show();
+                    }
+                    else if(model.getStatus().equals(DEAC) ||model.getStatus().equals(SCBP)){
+                        AlertDialog dialog = DEAC_Popup(context,model.getStudentNames());
+                        dialog.show();
+                    }
+                    else if(model.getStatus().equals(Active)){
+                        context.startActivity(new Intent(context, SingleStudentProfile.class));
+                    }
                 }
             }
         });
+    }
+
+    private Bitmap ConvertBase64(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
     @Override
@@ -86,14 +188,16 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.ViewHo
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView StudentImage;
         TextView StudentName;
-        public ViewHolder(@NonNull View itemView) {
+        ProgressBar progressBar;
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             StudentImage = itemView.findViewById(R.id.StudentImage);
             StudentName = itemView.findViewById(R.id.StudentName);
+            progressBar = itemView.findViewById(R.id.Loader);
 
         }
     }

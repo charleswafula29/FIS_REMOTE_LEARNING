@@ -1,38 +1,58 @@
 package com.fairmontsintenational.fis_remote_learning.models;
 
 public class InvoiceFee {
-    private String date;
-    private String amount;
+    private Integer ID, StudentID;
+    private String Description,TxnDate;
+    private float Debit,Payments,RunningBalance;
 
-    public String getDate() {
-        return date;
+    public InvoiceFee(Integer ID, Integer studentID, String description, String txnDate, float debit, float payments, float runningBalance) {
+        this.ID = ID;
+        StudentID = studentID;
+        Description = description;
+        TxnDate = txnDate;
+        Debit = debit;
+        Payments = payments;
+        RunningBalance = runningBalance;
     }
 
-    public String getAmount() {
-        return amount;
+    public Integer getID() {
+        return ID;
     }
 
-    public String getAmount_debit() {
-        return amount_debit;
-    }
-
-    public String getPeriod() {
-        return period;
+    public Integer getStudentID() {
+        return StudentID;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    private String amount_debit;
-    private String period;
-    private String description;
+    public String getTxnDate() {
+        return TxnDate;
+    }
 
-    public InvoiceFee(String date, String amount, String amount_debit, String period, String description) {
-        this.date = date;
-        this.amount = amount;
-        this.amount_debit = amount_debit;
-        this.period = period;
-        this.description = description;
+    public float getDebit() {
+        return Debit;
+    }
+
+    public float getPayments() {
+        return Payments;
+    }
+
+    public float getRunningBalance() {
+        return RunningBalance;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceFee{" +
+                "ID=" + ID +
+                ", StudentID=" + StudentID +
+                ", Description='" + Description + '\'' +
+                ", TxnDate='" + TxnDate + '\'' +
+                ", Debit=" + Debit +
+                ", Payments=" + Payments +
+                ", RunningBalance=" + RunningBalance +
+                '}';
     }
 }

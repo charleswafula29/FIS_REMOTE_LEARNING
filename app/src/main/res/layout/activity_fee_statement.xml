@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:id="@+id/root_view"
+    tools:context=".FeeStatement">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/avenir_regular"
+            android:text="@string/student_fees_statement"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_regular"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="10dp"
+        android:text="@string/scroll_left_right_up_down_to_view_full_statement" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/date"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/description"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="124dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/White"
+                    android:background="@color/backgroundcolor"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:textStyle="bold"
+                    android:text="@string/debit_amount"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    android:textColor="@color/White"
+                    android:background="@color/backgroundcolor"
+                    android:text="@string/payment_only"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/balance"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/White"
+                    android:background="@color/backgroundcolor"
+                    android:fontFamily="@font/avenirltstd_light"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/Refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/statement_list"
+                    android:nestedScrollingEnabled="false" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>

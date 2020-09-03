@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/material_login"
+    android:padding="5dp">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/Animation"
+        app:lottie_loop="true"
+        app:lottie_fileName="loader.json"
+        app:lottie_autoPlay="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_regular"
+        android:padding="10dp"
+        android:text="@string/registering"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/Animation"
+        app:layout_constraintStart_toStartOf="@+id/Animation"
+        app:layout_constraintTop_toBottomOf="@+id/Animation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
