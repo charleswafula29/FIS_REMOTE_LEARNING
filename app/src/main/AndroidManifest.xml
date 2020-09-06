@@ -18,9 +18,13 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
         <activity
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/BlackStatusBar"
+            android:name=".CommentReport"/>
+        <activity
+            android:name=".FeeStatement"
             android:screenOrientation="landscape"
             android:theme="@style/BlackStatusBar"
-            android:name=".FeeStatement"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".StudentRegistrationComplete"
@@ -56,7 +60,8 @@
             android:theme="@style/WhiteStatusBar" />
         <activity
             android:name=".SingleStudentProfile"
-            android:theme="@style/LightAccentTitle" />
+            android:theme="@style/BlackStatusBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Register"
             android:theme="@style/LightAccentTitle"
@@ -67,7 +72,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Homepage"
-            android:theme="@style/BlackStatusBar" />
+            android:theme="@style/BlackStatusBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Introduction"
             android:theme="@style/WhiteStatusBar" />

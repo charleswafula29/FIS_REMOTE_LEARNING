@@ -275,62 +275,6 @@ public class Register extends AppCompatActivity {
         }
     }
 
-//    private void login(String number, String pass) {
-//
-//        String url = BaseUrl.getLogin(number, pass);
-//
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        progressDialog.dismiss();
-//                        Gson gson = new Gson();
-//                        try {
-//                            final LoginModel model = gson.fromJson(response.getJSONObject("Response").toString(), LoginModel.class);
-//                            if(model.getStatus().getCode().equals("0")){
-//                                ShowSnackBarError(model.getStatus().getMessage());
-//
-//                            }else{
-//                                Paper.book().write("Session", Sessions.Active.toString());
-//                                String parentModel = gson.toJson(model.getData());
-//                                Paper.book().write("ParentData",parentModel);
-//                                startActivity(new Intent(Register.this, Homepage.class));
-//                                finish();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                progressDialog.dismiss();
-//                String message = null;
-//                if (error instanceof NetworkError) {
-//                    message = getString(R.string.network_error);
-//                } else if (error instanceof ServerError) {
-//                    message = getString(R.string.server_error);
-//                } else if (error instanceof AuthFailureError) {
-//                    message = getString(R.string.auth_error);
-//                } else if (error instanceof ParseError) {
-//                    message = getString(R.string.parse_error);
-//                } else if (error instanceof TimeoutError) {
-//                    message = getString(R.string.timeout_error);
-//                } else {
-//                    ShowSnackBarError(error.toString());
-//                }
-//                ShowSnackBarError(message);
-//            }
-//        });
-//
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                0,
-//                -1,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        RequestQueue queue = Volley.newRequestQueue(Register.this);
-//        queue.add(jsonObjectRequest);
-//
-//    }
 
     private void validatePageOne() {
         if(Fname.getText().toString().isEmpty()){

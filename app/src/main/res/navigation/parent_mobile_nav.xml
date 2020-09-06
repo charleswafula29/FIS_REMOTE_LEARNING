@@ -11,11 +11,11 @@
         android:label="@string/home"
         tools:layout="@layout/fragment_parent_home" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.NotificationsFragment"
-        android:label="@string/notifications"
-        tools:layout="@layout/fragment_notifications" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="com.fairmontsintenational.fis_remote_learning.fragments.NotificationsFragment"-->
+<!--        android:label="@string/notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
         android:id="@+id/navigation_my_account"

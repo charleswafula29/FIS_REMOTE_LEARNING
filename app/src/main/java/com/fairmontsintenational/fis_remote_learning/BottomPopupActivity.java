@@ -2,6 +2,7 @@ package com.fairmontsintenational.fis_remote_learning;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -15,6 +16,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -32,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -40,11 +44,17 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fairmontsintenational.fis_remote_learning.classes.SendMail;
+import com.fairmontsintenational.fis_remote_learning.models.CancelSubscriptionModel;
 import com.fairmontsintenational.fis_remote_learning.models.CredentialsModel;
+import com.fairmontsintenational.fis_remote_learning.models.StatusModel;
+import com.fairmontsintenational.fis_remote_learning.utils.BaseUrl;
+import com.fairmontsintenational.fis_remote_learning.utils.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -52,10 +62,15 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.yalantis.ucrop.UCrop;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import static androidx.core.content.FileProvider.getUriForFile;
+import static com.fairmontsintenational.fis_remote_learning.utils.Utils.RegistrationSuccessPopup;
 
 public class BottomPopupActivity extends AppCompatActivity {
 
@@ -87,6 +102,10 @@ public class BottomPopupActivity extends AppCompatActivity {
         void onTakeCameraSelected();
 
         void onChooseGallerySelected();
+    }
+
+    public interface onCancelPaymentOptions{
+        void onAcceptSelected();
     }
 
     @Override
@@ -280,6 +299,108 @@ public class BottomPopupActivity extends AppCompatActivity {
         });
 
         bottomSheetDialog.show();
+    }
+
+    public static void CancelSubscription(final Context context,final String names,final Integer StudentID){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.cancel_subscription_popup, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+
+        ((TextView) view.findViewById(R.id.ConfirmationText)).append(" "+ names);
+        final EditText narrative = view.findViewById(R.id.Narrative);
+        final ProgressBar progressBar = view.findViewById(R.id.MpBar);
+
+        final Button cancel = view.findViewById(R.id.ConfirmationCancel);
+        final Button proceed = view.findViewById(R.id.ConfirmationOk);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(narrative.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Kindly enter a reason for end of subscription.", Toast.LENGTH_LONG).show();
+                }else{
+                    cancel.setEnabled(false);
+                    proceed.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    CancelSubscriptionModel subscriptionModel = new CancelSubscriptionModel(StudentID,narrative.getText().toString());
+                    final Gson gson = new Gson();
+                    String param = gson.toJson(subscriptionModel);
+
+                    try {
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BaseUrl.getCancelSubscription(), new JSONObject(param),
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        Log.e("Resp",response.toString());
+                                        cancel.setEnabled(true);
+                                        proceed.setEnabled(true);
+                                        progressBar.setVisibility(View.GONE);
+                                        try {
+                                            StatusModel model = gson.fromJson(response.getJSONObject("status").toString(),StatusModel.class);
+                                            if(model.getCode().equals("1")){
+                                                dialog.dismiss();
+                                                Utils.ShowSuccessPopup(context,"Subscription cancelled",model.getMessage());
+                                            }else{
+                                                dialog.dismiss();
+                                                Toast.makeText(context, model.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                cancel.setEnabled(true);
+                                proceed.setEnabled(true);
+                                progressBar.setVisibility(View.GONE);
+                                String message = null;
+                                if (error instanceof NetworkError) {
+                                    message = context.getString(R.string.network_error);
+                                } else if (error instanceof ServerError) {
+                                    message = context.getString(R.string.server_error);
+                                } else if (error instanceof AuthFailureError) {
+                                    message = context.getString(R.string.auth_error);
+                                } else if (error instanceof ParseError) {
+                                    message = context.getString(R.string.parse_error);
+                                } else if (error instanceof TimeoutError) {
+                                    message = context.getString(R.string.timeout_error);
+                                } else {
+                                    message = error.toString();
+                                }
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                                0,
+                                -1,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                        RequestQueue queue = Volley.newRequestQueue(context);
+                        queue.add(jsonObjectRequest);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        dialog.dismiss();
+                        Toast.makeText(context, "Failed to perform request. Kindly reach our help desk", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     public static void StudentCredentialsBottomSheet(final Context context, final List<CredentialsModel> list){

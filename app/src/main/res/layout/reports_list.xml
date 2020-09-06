@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grey_underline"
+    android:paddingBottom="10dp"
+    android:layout_marginTop="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:padding="8dp"
+        android:src="@drawable/report"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/avenir_regular"
+        android:text="@string/date"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/icon"/>
+
+    <TextView
+        android:id="@+id/PreviewTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenirltstd_light"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginTop="5dp"
+        android:text="@string/description"
+        android:textAllCaps="false"
+        android:textColor="@color/GreyTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/Date"
+        app:layout_constraintStart_toStartOf="@+id/Date"
+        app:layout_constraintTop_toBottomOf="@+id/Date" />
+
+    <TextView
+        android:id="@+id/Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grey_circle"
+        android:fontFamily="@font/avenirltstd_light"
+        android:layout_marginTop="5dp"
+        android:paddingStart="6dp"
+        android:paddingLeft="6dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="3dp"
+        android:text="@string/not_commented"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/PreviewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/PreviewTitle" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_next"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Status"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

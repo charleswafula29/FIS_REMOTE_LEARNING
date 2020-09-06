@@ -31,7 +31,7 @@
         tools:targetApi="lollipop">
 
         <TextView
-            android:id="@+id/RegisterTitle"
+            android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"

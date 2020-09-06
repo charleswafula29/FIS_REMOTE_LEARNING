@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/navigation_diary"
-        android:icon="@drawable/ic_diary"
+        android:icon="@drawable/report"
         android:title="@string/student_diary"
         />
 

@@ -135,6 +135,13 @@ public class StudentProfileFragment extends Fragment {
             }
         });
 
+        ((ConstraintLayout)root.findViewById(R.id.StopPayment)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomPopupActivity.CancelSubscription(context, model.getStudentNames(),model.getSid());
+            }
+        });
+
         Names.setText(convertCapitalText(model.getStudentNames()));
         AccountStatus.setText(model.getStatus());
         SUID.setText(model.getSUID());

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,8 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -54,6 +57,17 @@ import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.callba
 import static com.fairmontsintenational.fis_remote_learning.utils.BaseUrl.transctionDesc;
 
 public class Utils {
+
+    public static String pickPreviewText(String text){
+        int length = text.length();
+        String preview;
+        if(length>30){
+            preview =text.substring(0,30)+"....";
+        }else {
+            preview = text;
+        }
+        return preview;
+    }
 
     public static String pickFirstName(String names){
         List<String> list = new ArrayList<String>(Arrays.asList(names.split(" ")));
@@ -88,6 +102,12 @@ public class Utils {
         int minutes = calendar.get(Calendar.MINUTE);
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
+    public static String getCurrentDate()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",java.util.Locale.getDefault());
+        Date date = new Date();
+        return formatter.format(date);
+    }
 
     public static void ShowLongSnackBar(View view,String Message){
         Snackbar.make(view,Message,Snackbar.LENGTH_LONG).show();
@@ -108,6 +128,25 @@ public class Utils {
 
         //dialog.show();
         return dialog;
+    }
+
+    public static void ShowSuccessPopup(Context context,String Title,String Message){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.success_layout, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ((TextView) view.findViewById(R.id.title)).setText(Title);
+        ((TextView) view.findViewById(R.id.Message)).setText(Message);
+        view.findViewById(R.id.Close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     public static AlertDialog LockedAccountPopup(Context context){
@@ -354,7 +393,7 @@ public class Utils {
                             BusinessShortCode,
                             phone,
                             callbackurl,
-                            String.valueOf(SUID),
+                            "SID"+SUID,
                             transctionDesc
                     );
 

@@ -7,11 +7,11 @@
         android:title="@string/home"
         />
 
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_bell"
-        android:title="@string/notifications"
-        />
+<!--    <item-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:icon="@drawable/ic_bell"-->
+<!--        android:title="@string/notifications"-->
+<!--        />-->
 
     <item
         android:id="@+id/navigation_my_account"

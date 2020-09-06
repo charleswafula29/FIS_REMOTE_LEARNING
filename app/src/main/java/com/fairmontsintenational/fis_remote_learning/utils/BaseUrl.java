@@ -55,16 +55,34 @@ public class BaseUrl {
     public static String getParentProfPic(String parentId){
         return main+"api/ParentProfilePic?ParentId="+parentId;
     }
+
     public static String getFeeStatement(String sid){
         return main+"api/GetFeeStatement?Sid="+sid.replace("SID","")+"&asDate=1/1/2020";
     }
+
     public static String getFetchStudentPic(Integer sid){
         return main+"api/StudentProfilePicture?Sid="+sid;
     }
+
     public static String getStudentCredentials(Integer sid){
         return main+"api/VirtualCredentials?sid="+sid;
     }
+
     public static String getUploadStudentPic(){
         return main+"api/UpdateStudentProfilePic";
     }
+
+    public static String getStudentReports(Integer sid){
+        return main+"api/fetchreportsSId?Sid="+sid;
+    }
+
+    public static String getCommentStudentReports(Integer diaryID,String Date,String Comment){
+        return main+"api/addcomment?diary_id="+diaryID+"&date="+Date+"&comment="+Comment;
+    }
+
+    public static String getCancelSubscription(){
+        return main+"api/CancelStudentSubScription";
+    }
+
+
 }

@@ -142,7 +142,9 @@ public class StudentProfiles extends AppCompatActivity {
                                                     respModel.getSUID()));
                                         }
                                     } else if (type.equals(Constants.INACTIVE_STUDENTS.toString())) {
-                                        if(!respModel.getStatus().equals(Active) || !respModel.getStatus().equals(IAAP)){
+                                        if(respModel.getStatus().equals(PSA) || respModel.getStatus().equals(HNS)
+                                        || respModel.getStatus().equals(SAP) || respModel.getStatus().equals(SCBP)
+                                                || respModel.getStatus().equals(DEAC)){
                                             list.add(new StudentModel(respModel.getSId(),
                                                     respModel.getName(), respModel.getSEX(), respModel.getCName(), respModel.getAdmno(),
                                                     respModel.getStatus(),

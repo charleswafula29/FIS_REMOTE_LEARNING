@@ -171,4 +171,19 @@
     <string name="username">Username:</string>
     <string name="pass">Password:</string>
     <string name="no_credentials_set_for_this_account_yet">No credentials set for this account yet.</string>
+    <string name="search_reports">Search reports</string>
+    <string name="commented">Commented</string>
+    <string name="not_commented">Not commented</string>
+    <string name="comment_on_report">Comment on Report</string>
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
+    <string name="report_date">Report date</string>
+    <string name="report_title">Report Title</string>
+    <string name="teacher_s_comments">Teacher\'s Comments</string>
+    <string name="your_comments">Your Comments</string>
+    <string name="enter_comments">Enter comments</string>
+    <string name="post_comment">Post Comment</string>
+    <string name="confirm_subscription_cancellation">Confirm Subscription Cancellation</string>
+    <string name="i_confirm_the_termination_of_subscription_for_student">I confirm the termination of subscription for student</string>
+    <string name="enter_reason">Enter reason</string>
 </resources>

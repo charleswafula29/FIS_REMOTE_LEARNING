@@ -1,83 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/select_child_profile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_marginTop="5dp"
+    android:background="@drawable/grey_underline"
+    android:paddingBottom="10dp">
 
-    <RelativeLayout
-        android:id="@+id/select_child_profile"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_payment" />
+
+    <TextView
+        android:id="@+id/Platform"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grey_underline"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/imageView"
+        android:fontFamily="@font/avenir_regular"
+        android:text="@string/date"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_payment" />
+    <TextView
+        android:id="@+id/Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Platform"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/imageView"
+        android:fontFamily="@font/avenir_regular"
+        android:text="@string/ksh"
+        android:textColor="@color/Red"
+        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/Platform"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/imageView"
-            android:fontFamily="@font/avenir_regular"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/Username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Platform"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/imageView"
-            android:fontFamily="@font/avenir_regular"
-            android:text="@string/ksh"
-            android:textColor="@color/Red"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/fees_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Username"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/imageView"
-            android:fontFamily="@font/avenir_regular"
-            android:text="@string/ksh"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp" />
+    <TextView
+        android:id="@+id/fees_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Username"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/imageView"
+        android:fontFamily="@font/avenir_regular"
+        android:text="@string/ksh"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
 
 
-        <TextView
-            android:id="@+id/fees_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fees_amount"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/imageView"
-            android:fontFamily="@font/avenirltstd_light"
-            android:text="@string/description"
-            android:textColor="@color/GreyTextColor"
-            android:textSize="14sp"
-            android:lineSpacingMultiplier="1.2"
-            android:layout_marginTop="4dp"
-            android:paddingBottom="4dp"
-            android:textAllCaps="false"
-            />
+    <TextView
+        android:id="@+id/fees_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fees_amount"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/imageView"
+        android:fontFamily="@font/avenirltstd_light"
+        android:lineSpacingMultiplier="1.2"
+        android:paddingBottom="4dp"
+        android:text="@string/description"
+        android:textAllCaps="false"
+        android:textColor="@color/GreyTextColor"
+        android:textSize="14sp" />
 
 
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
