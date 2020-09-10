@@ -48,9 +48,12 @@ import com.fairmontsintenational.fis_remote_learning.BottomPopupActivity;
 import com.fairmontsintenational.fis_remote_learning.Login;
 import com.fairmontsintenational.fis_remote_learning.R;
 import com.fairmontsintenational.fis_remote_learning.classes.Sessions;
+import com.fairmontsintenational.fis_remote_learning.forgotPassword.ForgotPassword;
+import com.fairmontsintenational.fis_remote_learning.forgotPassword.VerificationCode;
 import com.fairmontsintenational.fis_remote_learning.models.LoginDataModel;
 import com.fairmontsintenational.fis_remote_learning.utils.BaseUrl;
 import com.fairmontsintenational.fis_remote_learning.utils.Utils;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -125,7 +128,7 @@ public class ParentAccountFragment extends Fragment {
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomPopupActivity.ChangeUserPasswordBottomSheet(context,phone_no);
+                changePassword(Paper.book().read("Phone").toString());
             }
         });
 
@@ -139,6 +142,56 @@ public class ParentAccountFragment extends Fragment {
         BottomPopupActivity.clearCache(context);
 
         return root;
+    }
+
+    private void changePassword(final String parentPhone) {
+        final AlertDialog dialog = Utils.ShowLoader(context);
+        dialog.show();
+        String url = BaseUrl.getRequestResetCode(parentPhone);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.dismiss();
+                        try {
+                            Intent intent = new Intent(context, VerificationCode.class);
+                            intent.putExtra("PhoneNo",parentPhone);
+                            intent.putExtra("Code",response.getString("Check"));
+                            startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            ShowSnackBarError("Failed, please contact our help desk or try again later.");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
+                String message = null;
+                if (error instanceof NetworkError) {
+                    message = getString(R.string.network_error);
+                } else if (error instanceof ServerError) {
+                    message = getString(R.string.server_error);
+                } else if (error instanceof AuthFailureError) {
+                    message = getString(R.string.auth_error);
+                } else if (error instanceof ParseError) {
+                    message = getString(R.string.parse_error);
+                } else if (error instanceof TimeoutError) {
+                    message = getString(R.string.timeout_error);
+                } else {
+                    ShowSnackBarError(error.toString());
+                }
+                ShowSnackBarError(message);
+            }
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                -1,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(jsonObjectRequest);
     }
 
     private void triggerSelect() {
@@ -338,13 +391,9 @@ public class ParentAccountFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(!response.getString("Check").equals("Failed")){
-                                Bitmap bitmap = ConvertBase64(response.getString("Check"));
-                                profilePic.setImageBitmap(bitmap);
-                                progressBar.setVisibility(View.GONE);
-                            }else{
-                                progressBar.setVisibility(View.GONE);
-                            }
+                            Bitmap bitmap = ConvertBase64(response.getString("ByteArray"));
+                            profilePic.setImageBitmap(bitmap);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                             progressBar.setVisibility(View.GONE);
@@ -417,5 +466,9 @@ public class ParentAccountFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         context = null;
+    }
+
+    private void ShowSnackBarError(String message){
+        Snackbar.make(root.findViewById(R.id.AccountLayout),message,Snackbar.LENGTH_SHORT).show();
     }
 }

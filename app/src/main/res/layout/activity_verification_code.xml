@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:id="@+id/ForgotLayout"
+    tools:context=".forgotPassword.VerificationCode">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/White"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/White">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/avenirltstd_light"
+            android:text="@string/change_password"
+            android:textColor="@color/backgroundcolor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        android:orientation="vertical">
+
+        <ImageView
+            android:src="@drawable/authenticate"
+            android:padding="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/avenirltstd_light"
+                android:text="@string/verification_code"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <EditText
+                android:id="@+id/Code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:autofillHints="@string/empty"
+                android:background="@drawable/rounded_blue_border"
+                android:fontFamily="@font/avenirltstd_light"
+                android:inputType="textCapCharacters"
+                android:padding="15dp"
+                android:hint="@string/empty"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/GreyTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_regular"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.3"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="@string/enter_verification_code_sent_to"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="@+id/Code"
+                app:layout_constraintStart_toStartOf="@+id/Code"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_light"
+                android:text="@string/new_password"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/Code" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="@string/empty"
+                android:background="@drawable/rounded_blue_border"
+                android:fontFamily="@font/avenirltstd_light"
+                android:hint="@string/empty"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/Code"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <ImageView
+                android:id="@+id/ShowPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_show_pass"
+                app:layout_constraintBottom_toBottomOf="@+id/Password"
+                app:layout_constraintEnd_toEndOf="@+id/Password"
+                app:layout_constraintTop_toTopOf="@+id/Password"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/Proceed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_circle"
+                android:padding="20dp"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView8"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/Password"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

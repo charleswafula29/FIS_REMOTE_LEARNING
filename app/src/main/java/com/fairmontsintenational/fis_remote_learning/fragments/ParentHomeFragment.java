@@ -1,6 +1,5 @@
 package com.fairmontsintenational.fis_remote_learning.fragments;
 
-import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,12 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,13 +33,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.fairmontsintenational.fis_remote_learning.Homepage;
-import com.fairmontsintenational.fis_remote_learning.Login;
 import com.fairmontsintenational.fis_remote_learning.R;
 import com.fairmontsintenational.fis_remote_learning.StudentProfiles;
 import com.fairmontsintenational.fis_remote_learning.adapters.StudentsAdapter;
 import com.fairmontsintenational.fis_remote_learning.classes.Constants;
-import com.fairmontsintenational.fis_remote_learning.classes.Sessions;
 import com.fairmontsintenational.fis_remote_learning.models.LoginDataModel;
 import com.fairmontsintenational.fis_remote_learning.models.LoginModel;
 import com.fairmontsintenational.fis_remote_learning.models.Profile;
@@ -74,12 +70,12 @@ public class ParentHomeFragment extends Fragment {
     private RecyclerView ActiveRecycler, InactiveRecycler;
     private List<StudentModel> ActiveStudents, InactiveStudents;
     private StudentsAdapter ActiveAdapter, InactiveAdapter;
-    private LoginDataModel dataModel;
     private View root;
     private ProgressBar progressBar;
     private CircleImageView profilePic;
     private Profile profile = new Profile();
     private Gson gson = new Gson();
+    private TextView NoInActivesFound;
 
     public ParentHomeFragment() {
         // Required empty public constructor
@@ -95,23 +91,22 @@ public class ParentHomeFragment extends Fragment {
         Paper.init(context);
         String parentData = Paper.book().read("ParentData").toString();
         final Gson gson = new Gson();
-        Log.d("HERE", parentData);
-        dataModel = gson.fromJson(parentData, LoginDataModel.class);
+        LoginDataModel dataModel = gson.fromJson(parentData, LoginDataModel.class);
 
         TextView names = root.findViewById(R.id.UserNames);
         TextView time = root.findViewById(R.id.Time);
         LinearLayout background = root.findViewById(R.id.linearLayout3);
-        names.setText((dataModel.getFirstName()==null)?"Not set":Utils.pickFirstName(dataModel.getFirstName()).toUpperCase());
+        NoInActivesFound = root.findViewById(R.id.NoInActivesFound);
+        names.setText((dataModel.getFirstName() == null) ? "Not set" : Utils.pickFirstName(dataModel.getFirstName()).toUpperCase());
 
         int hours = getTime();
-        if (hours>=1 && hours <= 12) {
+        if (hours >= 1 && hours <= 12) {
             time.setText(getString(R.string.good_morning));
             background.setBackground(ContextCompat.getDrawable(context, R.drawable.morning));
-        } else if (hours>=13 && hours <= 17) {
+        } else if (hours >= 13 && hours <= 17) {
             time.setText(getString(R.string.good_afternoon));
             background.setBackground(ContextCompat.getDrawable(context, R.drawable.morning));
-        }
-        else if(hours >= 18 && hours <= 24){
+        } else if (hours >= 18 && hours <= 24) {
             time.setText(getString(R.string.good_evening));
             background.setBackground(ContextCompat.getDrawable(context, R.drawable.evening));
         }
@@ -138,9 +133,29 @@ public class ParentHomeFragment extends Fragment {
             }
         });
 
+        root.findViewById(R.id.ActiveCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, StudentProfiles.class);
+                intent.putExtra("Type", Constants.ACTIVE_STUDENTS.toString());
+                //Paper.book().write("Data",ActiveStudents);
+                startActivity(intent);
+            }
+        });
+
         ((TextView) root.findViewById(R.id.InactiveTitle)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, StudentProfiles.class);
+                intent.putExtra("Type", Constants.INACTIVE_STUDENTS.toString());
+                //Paper.book().write("Data",InactiveStudents);
+                startActivity(intent);
+            }
+        });
+
+        root.findViewById(R.id.InactiveCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(context, StudentProfiles.class);
                 intent.putExtra("Type", Constants.INACTIVE_STUDENTS.toString());
                 //Paper.book().write("Data",InactiveStudents);
@@ -161,13 +176,9 @@ public class ParentHomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(!response.getString("Check").equals("Failed")){
-                                Bitmap bitmap = ConvertBase64(response.getString("Check"));
-                                profilePic.setImageBitmap(bitmap);
-                                progressBar.setVisibility(View.GONE);
-                            }else{
-                                progressBar.setVisibility(View.GONE);
-                            }
+                            Bitmap bitmap = ConvertBase64(response.getString("ByteArray"));
+                            profilePic.setImageBitmap(bitmap);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                             progressBar.setVisibility(View.GONE);
@@ -194,7 +205,7 @@ public class ParentHomeFragment extends Fragment {
         InactiveStudents = new ArrayList<>();
         final AlertDialog dialog = Utils.ShowLoader(context);
         dialog.show();
-        String url = BaseUrl.getLogin(Paper.book().read("Phone").toString(),Paper.book().read("Pass").toString());
+        String url = BaseUrl.getLogin(Paper.book().read("Phone").toString(), Paper.book().read("Pass").toString());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -203,21 +214,21 @@ public class ParentHomeFragment extends Fragment {
                         Gson gson = new Gson();
                         try {
                             final LoginModel model = gson.fromJson(response.getJSONObject("Response").toString(), LoginModel.class);
-                            if(model.getStatus().getCode().equals("0")){
+                            if (model.getStatus().getCode().equals("0")) {
                                 progressBar.setVisibility(View.GONE);
-                                Snackbar.make(root,model.getStatus().getMessage(),Snackbar.LENGTH_LONG).show();
-                            }else{
-                                for(StudentsRespModel respModel: model.getData().getStudents()){
-                                    if(respModel.getStatus().equals(Active) || respModel.getStatus().equals(IAAP)){
+                                Snackbar.make(root, model.getStatus().getMessage(), Snackbar.LENGTH_LONG).show();
+                            } else {
+                                for (StudentsRespModel respModel : model.getData().getStudents()) {
+                                    if (respModel.getStatus().equals(Active) || respModel.getStatus().equals(IAAP)) {
                                         ActiveStudents.add(new StudentModel(respModel.getSId(),
-                                                respModel.getName(),respModel.getSEX(),respModel.getCName(),respModel.getAdmno(),
+                                                respModel.getName(), respModel.getSEX(), respModel.getCName(), respModel.getAdmno(),
                                                 respModel.getStatus(),
                                                 Constants.NORMAL.toString(),
                                                 Integer.valueOf(respModel.getBalances()),
                                                 respModel.getSUID()));
-                                    }else{
+                                    } else {
                                         InactiveStudents.add(new StudentModel(respModel.getSId(),
-                                                respModel.getName(),respModel.getSEX(),respModel.getCName(),respModel.getAdmno(),
+                                                respModel.getName(), respModel.getSEX(), respModel.getCName(), respModel.getAdmno(),
                                                 respModel.getStatus(),
                                                 Constants.NORMAL.toString(),
                                                 Integer.valueOf(respModel.getBalances()),
@@ -225,13 +236,18 @@ public class ParentHomeFragment extends Fragment {
                                     }
                                 }
 
-                                ActiveStudents.add(new StudentModel(null, null, null, null, null, null, Constants.ADD.toString(),null,null));
+                                ActiveStudents.add(new StudentModel(null, null, null, null, null, null, Constants.ADD.toString(), null, null));
 
                                 ActiveAdapter = new StudentsAdapter(ActiveStudents, context);
                                 ActiveRecycler.setAdapter(ActiveAdapter);
 
                                 InactiveAdapter = new StudentsAdapter(InactiveStudents, context);
                                 InactiveRecycler.setAdapter(InactiveAdapter);
+                                if(InactiveStudents.size()==0){
+                                    NoInActivesFound.setVisibility(View.VISIBLE);
+                                }else {
+                                    NoInActivesFound.setVisibility(View.GONE);
+                                }
                                 dialog.dismiss();
                             }
                         } catch (JSONException e) {
@@ -256,7 +272,7 @@ public class ParentHomeFragment extends Fragment {
                 } else {
                     message = error.toString();
                 }
-                ShowLongSnackBar(root,message);
+                ShowLongSnackBar(root, message);
             }
         });
 
@@ -269,7 +285,7 @@ public class ParentHomeFragment extends Fragment {
 
     }
 
-    private Bitmap ConvertBase64(String base64String){
+    private Bitmap ConvertBase64(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }

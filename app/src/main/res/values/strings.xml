@@ -104,6 +104,8 @@
     <string name="phone_required">Phone number required.</string>
     <string name="phone_invalid_format">Phone number invalid format.</string>
     <string name="pass_required">Password required.</string>
+    <string name="pass_too_short">Password is too short.</string>
+    <string name="code_required">Please enter verification code.</string>
     <string name="confirm_new_password">Confirm new password</string>
     <string name="hint_0712345678">example: 0712345678</string>
     <string name="required"> is empty.</string>
@@ -186,4 +188,12 @@
     <string name="confirm_subscription_cancellation">Confirm Subscription Cancellation</string>
     <string name="i_confirm_the_termination_of_subscription_for_student">I confirm the termination of subscription for student</string>
     <string name="enter_reason">Enter reason</string>
+    <string name="a_verification_code_will_be_sent_to_the_number_provided_above_as_our_security_measure">A verification code will be sent to the number provided above as our security measure.</string>
+    <string name="change_password">Change password</string>
+    <string name="enter_verification_code_sent_to">Enter verification code sent to your number.</string>
+    <string name="verification_code">Verification code</string>
+    <string name="failed">Failed</string>
+    <string name="code_mismatch_failed">The code entered is incorrect, kindly re-check the sent code and try again.</string>
+    <string name="no_in_active_profiles_found">No in-active profiles found.</string>
+    <string name="no_records_found_swipe_down_to_refresh">No records found, swipe down to refresh</string>
 </resources>

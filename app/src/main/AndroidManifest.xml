@@ -18,9 +18,15 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
         <activity
-            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/WhiteStatusBar"
+            android:name=".forgotPassword.VerificationCode"/>
+        <activity
+            android:name=".forgotPassword.ForgotPassword"
+            android:theme="@style/WhiteStatusBar" />
+        <activity
+            android:name=".CommentReport"
             android:theme="@style/BlackStatusBar"
-            android:name=".CommentReport"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".FeeStatement"
             android:screenOrientation="landscape"

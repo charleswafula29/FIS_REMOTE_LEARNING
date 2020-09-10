@@ -27,8 +27,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.fairmontsintenational.fis_remote_learning.classes.Constants;
 import com.fairmontsintenational.fis_remote_learning.classes.Sessions;
+import com.fairmontsintenational.fis_remote_learning.forgotPassword.ForgotPassword;
 import com.fairmontsintenational.fis_remote_learning.models.LoginModel;
 import com.fairmontsintenational.fis_remote_learning.utils.BaseUrl;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,7 +43,6 @@ import static com.fairmontsintenational.fis_remote_learning.utils.Utils.LockedAc
 
 public class Login extends AppCompatActivity {
     private Button BtnLogin;
-    private TextView SignUp;
     private EditText phoneNo,Password;
     private ProgressBar progressBar;
     private ImageView ShowPass;
@@ -55,7 +54,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         BtnLogin = findViewById(R.id.Login);
-        SignUp = findViewById(R.id.SignUp);
+        TextView signUp = findViewById(R.id.SignUp);
         phoneNo = findViewById(R.id.PhoneNo);
         Password = findViewById(R.id.Password);
         progressBar = findViewById(R.id.Loader);
@@ -92,10 +91,17 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.ForgotPass).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, ForgotPassword.class));
+            }
+        });
+
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(phoneNo.getText() == null){
+                if(phoneNo.getText().toString().isEmpty()){
                     phoneNo.setError(getString(R.string.phone_required));
                     phoneNo.requestFocus();
                 }else if(phoneNo.getText().toString().length() < 10){
@@ -113,7 +119,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        SignUp.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this,Register.class));

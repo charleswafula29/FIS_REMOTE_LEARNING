@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -68,6 +69,8 @@ public class StudentProfiles extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ConstraintLayout root;
+    private LottieAnimationView NotFound;
+    private TextView NotFoundText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,8 @@ public class StudentProfiles extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.Refresh);
         recyclerView = findViewById(R.id.Recycler);
         root = findViewById(R.id.root_view);
+        NotFound = findViewById(R.id.imageView3);
+        NotFoundText = findViewById(R.id.NoText);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(StudentProfiles.this));
@@ -157,6 +162,14 @@ public class StudentProfiles extends AppCompatActivity {
 
                                 InnerAdapter adapter = new InnerAdapter(list);
                                 recyclerView.setAdapter(adapter);
+
+                                if(list.size()==0){
+                                    NotFound.setVisibility(View.VISIBLE);
+                                    NotFoundText.setVisibility(View.VISIBLE);
+                                }else {
+                                    NotFound.setVisibility(View.GONE);
+                                    NotFoundText.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException e) {
                             swipeRefreshLayout.setRefreshing(false);
@@ -167,6 +180,14 @@ public class StudentProfiles extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 swipeRefreshLayout.setRefreshing(false);
+
+                if(list.size()==0){
+                    NotFound.setVisibility(View.VISIBLE);
+                    NotFoundText.setVisibility(View.VISIBLE);
+                }else {
+                    NotFound.setVisibility(View.GONE);
+                    NotFoundText.setVisibility(View.GONE);
+                }
                 String message = null;
                 if (error instanceof NetworkError) {
                     message = getString(R.string.network_error);

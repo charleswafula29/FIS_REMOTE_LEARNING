@@ -4,6 +4,8 @@ import com.androidstudy.daraja.util.Settings;
 
 import io.paperdb.Paper;
 
+import static com.fairmontsintenational.fis_remote_learning.utils.Utils.getCurrentDateTime;
+
 public class BaseUrl {
     public static final String GET_MAIN_URL = "https://www.fairmontsinternationalschool.co.ke/fairmontsAPI/url.php";
     private static String main = "http://197.248.111.170:56/";
@@ -53,7 +55,7 @@ public class BaseUrl {
     }
 
     public static String getParentProfPic(String parentId){
-        return main+"api/ParentProfilePic?ParentId="+parentId;
+        return main+"api/ParentProfilePicture?ParentID="+parentId;
     }
 
     public static String getFeeStatement(String sid){
@@ -82,6 +84,13 @@ public class BaseUrl {
 
     public static String getCancelSubscription(){
         return main+"api/CancelStudentSubScription";
+    }
+
+    public static String getRequestResetCode(String phoneNo){
+        return main+"api/GenerateResetPasswordCode?phone_no="+phoneNo+"&ExpiryTime="+getCurrentDateTime();
+    }
+    public static String getChangePassword(String phoneNo,String newPass){
+        return main+"api/ForgotPassword?phone_no="+phoneNo+"&new_password="+newPass;
     }
 
 

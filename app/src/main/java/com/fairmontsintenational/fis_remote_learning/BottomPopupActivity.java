@@ -134,128 +134,128 @@ public class BottomPopupActivity extends AppCompatActivity {
         }
     }
 
-    public static void ChangeUserPasswordBottomSheet(final Context context,final String phone_no){
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                context, R.style.BottomSheetDialogTheme);
-        final View view = LayoutInflater
-                .from(context).inflate(R.layout.bottom_reset_password, null);
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.setCancelable(false);
-        bottomSheetDialog.show();
-
-        final Button submit;
-        final ProgressBar progressBar;
-        final ImageView showPass,close;
-
-        final EditText oldpassword = view.findViewById(R.id.UserOldPassword);
-        final EditText newPass = view.findViewById(R.id.UserNewPassword);
-        final EditText ConfirmPass = view.findViewById(R.id.UserConfirmPassword);
-        submit = view.findViewById(R.id.UserChangePass);
-        progressBar = view.findViewById(R.id.Loader);
-        showPass = view.findViewById(R.id.UserShowOldPassword);
-        close = view.findViewById(R.id.Close);
-        final ConstraintLayout details = view.findViewById(R.id.Details);
-        final ConstraintLayout found = view.findViewById(R.id.Found);
-
-        details.setVisibility(View.VISIBLE);
-        found.setVisibility(View.GONE);
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setType = 1;
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-        showPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(setType==1) {
-                    setType = 0;
-                    oldpassword.setTransformationMethod(null);
-                    if (oldpassword.getText().length() > 0)
-                        oldpassword.setSelection(oldpassword.getText().length());
-                }
-                else{
-                    setType=1;
-                    oldpassword.setTransformationMethod(new PasswordTransformationMethod());
-                    if(oldpassword.getText().length() > 0)
-                        oldpassword.setSelection(oldpassword.getText().length());
-                }
-            }
-        });
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String old_pass=oldpassword.getText().toString().trim();
-                String new_pass=newPass.getText().toString().trim();
-                String confirm_pass=ConfirmPass.getText().toString().trim();
-
-                if(old_pass.isEmpty()){
-                    oldpassword.setError("Kindly enter your current password");
-                }else if(new_pass.isEmpty()){
-                    newPass.setError("Kindly enter your new password");
-                }else if(confirm_pass.isEmpty()){
-                    ConfirmPass.setError("Kindly enter your new password");
-                }else if(!new_pass.equals(confirm_pass)){
-                    ConfirmPass.setError("Passwords don't match!");
-                }
-                else{
-//                    String URL= BaseUrl.updatePassword(phone_no,new_pass,old_pass);
-//                    progressBar.setVisibility(View.VISIBLE);
-//                    submit.setEnabled(false);
-//                    close.setEnabled(false);
+//    public static void ChangeUserPasswordBottomSheet(final Context context,final String phone_no){
+//        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+//                context, R.style.BottomSheetDialogTheme);
+//        final View view = LayoutInflater
+//                .from(context).inflate(R.layout.bottom_reset_password, null);
+//        bottomSheetDialog.setContentView(view);
+//        bottomSheetDialog.setCancelable(false);
+//        bottomSheetDialog.show();
 //
-//                    StringRequest request=new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(String response) {
-//                            progressBar.setVisibility(View.GONE);
-//                            submit.setEnabled(true);
-//                            close.setEnabled(true);
+//        final Button submit;
+//        final ProgressBar progressBar;
+//        final ImageView showPass,close;
 //
-//                            Log.e("RESPONSE",response);
+//        final EditText oldpassword = view.findViewById(R.id.UserOldPassword);
+//        final EditText newPass = view.findViewById(R.id.UserNewPassword);
+//        final EditText ConfirmPass = view.findViewById(R.id.UserConfirmPassword);
+//        submit = view.findViewById(R.id.UserChangePass);
+//        progressBar = view.findViewById(R.id.Loader);
+//        showPass = view.findViewById(R.id.UserShowOldPassword);
+//        close = view.findViewById(R.id.Close);
+//        final ConstraintLayout details = view.findViewById(R.id.Details);
+//        final ConstraintLayout found = view.findViewById(R.id.Found);
 //
-//                            details.setVisibility(View.GONE);
-//                            found.setVisibility(View.VISIBLE);
+//        details.setVisibility(View.VISIBLE);
+//        found.setVisibility(View.GONE);
 //
-//                        }
-//                    }, new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//                            progressBar.setVisibility(View.GONE);
-//                            submit.setEnabled(true);
-//                            close.setEnabled(true);
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setType = 1;
+//                bottomSheetDialog.dismiss();
+//            }
+//        });
 //
-//                            String message = null;
-//                            if (error instanceof NetworkError) {
-//                                message = "Cannot connect to Internet...Please check your connection!";
-//                            } else if (error instanceof ServerError) {
-//                                message = "The server could not be found. Please try again after some time!!";
-//                            } else if (error instanceof AuthFailureError) {
-//                                message = "Cannot connect to Internet...Please check your connection!";
-//                            } else if (error instanceof ParseError) {
-//                                message = "Parsing error! Please try again after some time!!";
-//                            } else if (error instanceof TimeoutError) {
-//                                message = "Connection TimeOut! Please check your internet connection.";
-//                            }else{
-//                                Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-//                            }
+//        showPass.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(setType==1) {
+//                    setType = 0;
+//                    oldpassword.setTransformationMethod(null);
+//                    if (oldpassword.getText().length() > 0)
+//                        oldpassword.setSelection(oldpassword.getText().length());
+//                }
+//                else{
+//                    setType=1;
+//                    oldpassword.setTransformationMethod(new PasswordTransformationMethod());
+//                    if(oldpassword.getText().length() > 0)
+//                        oldpassword.setSelection(oldpassword.getText().length());
+//                }
+//            }
+//        });
 //
-//                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-//                        }
-//                    });
-//                    RequestQueue requestQueue= Volley.newRequestQueue(context);
-//                    requestQueue.add(request);
-                    Toast.makeText(context, "Reset password", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-
-
-    }
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String old_pass=oldpassword.getText().toString().trim();
+//                String new_pass=newPass.getText().toString().trim();
+//                String confirm_pass=ConfirmPass.getText().toString().trim();
+//
+//                if(old_pass.isEmpty()){
+//                    oldpassword.setError("Kindly enter your current password");
+//                }else if(new_pass.isEmpty()){
+//                    newPass.setError("Kindly enter your new password");
+//                }else if(confirm_pass.isEmpty()){
+//                    ConfirmPass.setError("Kindly enter your new password");
+//                }else if(!new_pass.equals(confirm_pass)){
+//                    ConfirmPass.setError("Passwords don't match!");
+//                }
+//                else{
+////                    String URL= BaseUrl.updatePassword(phone_no,new_pass,old_pass);
+////                    progressBar.setVisibility(View.VISIBLE);
+////                    submit.setEnabled(false);
+////                    close.setEnabled(false);
+////
+////                    StringRequest request=new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+////                        @Override
+////                        public void onResponse(String response) {
+////                            progressBar.setVisibility(View.GONE);
+////                            submit.setEnabled(true);
+////                            close.setEnabled(true);
+////
+////                            Log.e("RESPONSE",response);
+////
+////                            details.setVisibility(View.GONE);
+////                            found.setVisibility(View.VISIBLE);
+////
+////                        }
+////                    }, new Response.ErrorListener() {
+////                        @Override
+////                        public void onErrorResponse(VolleyError error) {
+////                            progressBar.setVisibility(View.GONE);
+////                            submit.setEnabled(true);
+////                            close.setEnabled(true);
+////
+////                            String message = null;
+////                            if (error instanceof NetworkError) {
+////                                message = "Cannot connect to Internet...Please check your connection!";
+////                            } else if (error instanceof ServerError) {
+////                                message = "The server could not be found. Please try again after some time!!";
+////                            } else if (error instanceof AuthFailureError) {
+////                                message = "Cannot connect to Internet...Please check your connection!";
+////                            } else if (error instanceof ParseError) {
+////                                message = "Parsing error! Please try again after some time!!";
+////                            } else if (error instanceof TimeoutError) {
+////                                message = "Connection TimeOut! Please check your internet connection.";
+////                            }else{
+////                                Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
+////                            }
+////
+////                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+////                        }
+////                    });
+////                    RequestQueue requestQueue= Volley.newRequestQueue(context);
+////                    requestQueue.add(request);
+//                    Toast.makeText(context, "Reset password", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
+//
+//
+//    }
 
     public static void ParentHomeMenuBottomSheet(final Context context, final String names, final String number, final onClickOptionsListener listener){
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
