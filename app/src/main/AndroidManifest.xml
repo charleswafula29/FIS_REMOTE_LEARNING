@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fairmontsintenational.fis_remote_learning">
+    package="com.fis.fis_remote_learning">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,27 +19,27 @@
         tools:targetApi="n">
         <activity
             android:theme="@style/WhiteStatusBar"
-            android:name=".forgotPassword.VerificationCode"/>
+            android:name="com.fis.fis_remote_learning.forgotPassword.VerificationCode"/>
         <activity
-            android:name=".forgotPassword.ForgotPassword"
+            android:name="com.fis.fis_remote_learning.forgotPassword.ForgotPassword"
             android:theme="@style/WhiteStatusBar" />
         <activity
-            android:name=".CommentReport"
+            android:name="com.fis.fis_remote_learning.CommentReport"
             android:theme="@style/BlackStatusBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".FeeStatement"
+            android:name="com.fis.fis_remote_learning.FeeStatement"
             android:screenOrientation="landscape"
             android:theme="@style/BlackStatusBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".StudentRegistrationComplete"
+            android:name="com.fis.fis_remote_learning.StudentRegistrationComplete"
             android:theme="@style/WhiteStatusBar" />
-        <activity android:name=".utils.MpesaActivity" />
+        <activity android:name="com.fis.fis_remote_learning.utils.MpesaActivity" />
         <activity
-            android:name=".SelectPackage"
+            android:name="com.fis.fis_remote_learning.SelectPackage"
             android:theme="@style/BlackStatusBar" />
-        <activity android:name=".classes.SendMail" />
+        <activity android:name="com.fis.fis_remote_learning.classes.SendMail" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/WhiteStatusBar" /> <!-- cache directory file provider paths -->
@@ -54,37 +54,37 @@
         </provider>
 
         <activity
-            android:name=".UserProfile"
+            android:name="com.fis.fis_remote_learning.UserProfile"
             android:theme="@style/LightAccentTitle" />
-        <activity android:name=".BottomPopupActivity" />
+        <activity android:name="com.fis.fis_remote_learning.BottomPopupActivity" />
         <activity
-            android:name=".RegisterStudent"
+            android:name="com.fis.fis_remote_learning.RegisterStudent"
             android:theme="@style/BlackStatusBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".StudentProfiles"
+            android:name="com.fis.fis_remote_learning.StudentProfiles"
             android:theme="@style/WhiteStatusBar" />
         <activity
-            android:name=".SingleStudentProfile"
+            android:name="com.fis.fis_remote_learning.SingleStudentProfile"
             android:theme="@style/BlackStatusBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Register"
+            android:name="com.fis.fis_remote_learning.Register"
             android:theme="@style/LightAccentTitle"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Login"
+            android:name="com.fis.fis_remote_learning.Login"
             android:theme="@style/LightAccentTitle"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Homepage"
+            android:name="com.fis.fis_remote_learning.Homepage"
             android:theme="@style/BlackStatusBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Introduction"
+            android:name="com.fis.fis_remote_learning.Introduction"
             android:theme="@style/WhiteStatusBar" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.fis.fis_remote_learning.SplashScreen"
             android:theme="@style/WhiteStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

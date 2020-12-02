@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.StudentProfileFragment"
+        android:name="com.fis.fis_remote_learning.fragments.StudentProfileFragment"
         android:label="@string/student_profile"
         tools:layout="@layout/fragment_student_profile" />
 
     <fragment
         android:id="@+id/navigation_fees"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.FeesFragment"
+        android:name="com.fis.fis_remote_learning.fragments.FeesFragment"
         android:label="@string/fees"
         tools:layout="@layout/fragment_fees" />
 
     <fragment
         android:id="@+id/navigation_diary"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.DiaryFragment"
+        android:name="com.fis.fis_remote_learning.fragments.DiaryFragment"
         android:label="@string/student_diary"
         tools:layout="@layout/fragment_diary" />
 

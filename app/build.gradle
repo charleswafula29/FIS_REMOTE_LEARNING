@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.fairmontsintenational.fis_remote_learning"
+        applicationId "com.fis.fis_remote_learning"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

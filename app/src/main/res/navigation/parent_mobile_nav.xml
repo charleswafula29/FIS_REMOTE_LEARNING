@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.ParentHomeFragment"
+        android:name="com.fis.fis_remote_learning.fragments.ParentHomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_parent_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_my_account"
-        android:name="com.fairmontsintenational.fis_remote_learning.fragments.ParentAccountFragment"
+        android:name="com.fis.fis_remote_learning.fragments.ParentAccountFragment"
         android:label="@string/my_account"
         tools:layout="@layout/fragment_parent_account" />
 
